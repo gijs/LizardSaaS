@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lizard <% if (user) { user.username } %></title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
+
+    <!-- Le styles -->
+    <link href="/stylesheets/bootstrap.css" rel="stylesheet">
+    <link href="/stylesheets/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/stylesheets/style.css" rel="stylesheet">
+    <link href="/stylesheets/prettify.css" rel="stylesheet">
+    <link href="/stylesheets/leaflet.css" rel="stylesheet">
+  	<!--[if lte IE 8]><link rel="stylesheet" href="/stylesheets/leaflet.ie.css" /><![endif]-->
+
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script src="/javascripts/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/javascripts/json2.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/javascripts/prettify.js" type="text/javascript" charset="utf-8"></script>
+  	<script src="/javascripts/leaflet.js"></script>
+  	<script src="/javascripts/gvector.js"></script>
+  	<script src="/javascripts/lvector.js"></script>
+
+
+    <script type='text/javascript' src='https://www.google.com/jsapi'></script>
+    <script>
+        google.load('visualization', '1', {packages: ['table']});
+    </script>
+
+    <script type="text/javascript">
+        function drawtable(json) {
+            console.log(json.feed);
+        }
+    </script>
+        
+    <script src="http://spreadsheets.google.com/feeds/cells/0AqSzObea9VFZdFAwOGFwNXZpMTJQaDdnSHNTYS12a2c/od6/public/values?alt=json-in-script&callback=drawtable"></script>
+
+</head>
+
+      
+<body onload="prettyPrint();">
+    <%- body %>
+      <hr>
+
+      <footer>
+        <p>&copy; Nelen &amp; Schuurmans 2012</p>
+      </footer>
+
+    </div> <!-- /container -->
+    
+    <script src="/javascripts/jquery.js"></script>
+    <script src="/javascripts/code-prettify.js"></script>
+    <script src="/javascripts/bootstrap.js"></script>
+    <script src="/javascripts/bootstrap-tooltip.js"></script>
+    <script src="/javascripts/bootstrap-popover.js"></script>
+    <script src="/javascripts/lizardsaas.js"></script>
+</body>
+      
+    
+
+
+
+</html>

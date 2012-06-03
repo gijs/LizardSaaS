@@ -1,0 +1,65 @@
+  <% if (user) { %>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Lizard</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li><a href="/">Home</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/api">API Docs</a></li>
+              <li><a href="/logout">Log out (<%= user.name %>)</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+  <% } %>
+    <div class="container">
+    
+        <% if (!user) { %>
+            <div class="hero-unit" id="wis">
+            	<img src="/images/lizard.png">
+                <br><br>
+    	        <p>The <strong>Water Information System</strong> of <a href="http://www.nelen-schuurmans.nl/">Nelen &amp; Schuurmans</a>.</p>
+    	        <p><a class="btn btn-small btn-info" id="login-with-dropbox" href="/auth/dropbox">Log with your Dropbox account</a></p>
+	        </div>
+	        
+          <div class="row-fluid payoff">
+
+              <div class="span4">
+                  <h2>More than just data</h2>
+                  <p>Lizard offers a powerful and flexible combination of hydrological data processing and visualization to enhance <em>decision making</em>.</p>
+                  <p>Our API provides unified and realtime access to specialized hydrology systems like <a href="http://www.deltares.nl/en/software/479962/delft-fews">FEWS</a>, <a href="http://www.deltaressystems.com/hydro/product/108282/sobek-suite">Sobek</a> and <a href="http://www.control-next.nl/">SCADA</a>.</p>
+              </div><!--/span-->
+
+              <div class="span4">
+                  <h2>Built with open source</h2>
+                  <p>We've built Lizard with open source software. We contribute back to the community via <a href="http://github.com/">Github</a>.</p>
+                  <p>Check out <a href="http://github.com/lizardsystem/">our repos</a> if you're interested!</p>
+                  <a href="http://github.com/"><img src="/images/github.png"></a>
+              </div><!--/span-->
+
+              <div class="span4">
+                  <h2>Workspaces</h2>
+                  <p>Lizard is built around the concept of workspaces.</p>
+                  <p>Workspaces are <em>composite layers of mixed data</em>. Workspaces can be represented as interactive maps and graphs.</p>
+                  <p>Workspaces allow you to back your story with information and facts, rather than raw data.</p>
+              </div><!--/span-->
+              
+          </div>
+
+
+        <% } else { %>
+            
+        <img src="/images/lizard.png">
+        <hr/>
+        <div id="map"></div>
+        
+    		<% } %>
+

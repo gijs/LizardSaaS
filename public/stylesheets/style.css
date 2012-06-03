@@ -1,0 +1,78 @@
+/* Landscape phones and down */
+@media (max-width: 480px) {
+    body {
+      padding-bottom: 40px;
+      font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    }
+    .payoff div:not(:first-child) {
+        border-top: 1px solid #EAEAEA;
+    }
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+    .hero-unit {
+        margin-top: 60px;
+    }
+    body {
+      padding-bottom: 40px;
+      font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    }
+    .payoff div:not(:first-child) {
+        border-top: 1px solid #EAEAEA;
+    }
+}
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+    .hero-unit {
+        margin-top: 60px;
+    }
+    body {
+      padding-bottom: 40px;
+      font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    }
+}
+
+/* Large desktop */
+@media (min-width: 980px) {
+    body {
+      margin-top: 60px;
+      padding-bottom: 40px;
+      font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    }
+}
+
+a {
+  color: #00B7FF;
+}
+
+.payoff p {
+  font-size:1em;
+  line-height:25px;
+  font-family: 'Droid Sans', sans-serif;
+}
+
+#wis {
+  background-image: url('/images/background-banner.png');
+  background-position: center left;
+  color: #fff;
+}
+
+#wis a{
+  color: #fff;
+}
+
+#map {
+  height: 500px;
+  box-shadow: 0px 0px 10px #ccc;
+  -moz-box-shadow: 0px 0px 10px #ccc;
+  -webkit-box-shadow: 0px 0px 10px #ccc;
+}
+
+.green {
+    color: green;
+}
+.blue {
+    color: #A4D3EE;
+}
