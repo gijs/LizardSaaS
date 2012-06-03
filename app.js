@@ -350,10 +350,34 @@ app.get('/api/v1/nl/:userid/dropbox/documents', ensureAuthenticated,
 function(req, res, user) {    
     dropbox.getMetadata('',
     function(err, data) {
-        if (err) console.log(err)
-        else return res.send(data)
+        if (err) {
+            console.log(err);
+            return res.send(err);
+        } else {
+            return res.send(data);
+        }
     });
 });
+
+app.post('/api/v1/nl/:userid/dropbox/documents', ensureAuthenticated,
+function(req, res, user) {
+    dropbox.deleteItem(req.body.path, 
+    function(err, data) {
+        if (err) {
+            console.log(err);
+            return res.send(err);
+        }
+        else {
+            return res.send(data);
+        }
+    });    
+});
+
+
+
+
+
+
 
 // app.get('/api/v1/nl/:userid/postgis', ensureAuthenticated,
 // function(req, res) {
