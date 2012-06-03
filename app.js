@@ -37,9 +37,9 @@ var geoserver_get_workspaces_options = {
 
 
 
-var conString = config.postgres.conn_string;
-var client = new pg.Client(conString);
-client.connect();
+// var conString = config.postgres.conn_string;
+// var client = new pg.Client(conString);
+// client.connect();
 
 
 // Initialize database
@@ -355,18 +355,18 @@ function(req, res, user) {
     });
 });
 
-app.get('/api/v1/nl/:userid/postgis', ensureAuthenticated,
-function(req, res) {
-    var user;
-    User.findById(req.user._id,
-    function(err, user) {
-        if(err) return console.log(err);
-        console.log("Creating PostGIS schema 'user.prefix':", user.prefix);
-        client.query("CREATE SCHEMA " + user.prefix);
-        client.query("ALTER EXTENSION postgis SET SCHEMA " + user.prefix);
-        return res.send("ok");
-    });
-});
+// app.get('/api/v1/nl/:userid/postgis', ensureAuthenticated,
+// function(req, res) {
+//     var user;
+//     User.findById(req.user._id,
+//     function(err, user) {
+//         if(err) return console.log(err);
+//         console.log("Creating PostGIS schema 'user.prefix':", user.prefix);
+//         client.query("CREATE SCHEMA " + user.prefix);
+//         client.query("ALTER EXTENSION postgis SET SCHEMA " + user.prefix);
+//         return res.send("ok");
+//     });
+// });
 
 
 
