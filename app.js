@@ -304,7 +304,6 @@ function(req, res) {
     return Workspace.findById(req.params.id,
     function(err, workspace) {
         if (!err) {
-            // RETURN GEOSERVER WORKSPACE BY ID ; http://docs.geoserver.org/latest/en/user/services/virtual-services.html
             return res.send(workspace);
         } else {
             return console.log(err);
@@ -312,7 +311,7 @@ function(req, res) {
     });
 });
 
-app.put('/api/v1/nl/workspaces/:id', ensureAuthenticated,
+app.put('/api/v1/nl/:user/workspaces/:id', ensureAuthenticated,
 function(req, res) {
     return Workspace.findById(req.params.id,
     function(err, workspace) {
@@ -329,17 +328,27 @@ function(req, res) {
     });
 });
 
-app.delete('/api/v1/nl/workspaces/:id', ensureAuthenticated,
+app.del('/api/v1/nl/:user/workspaces/:id', ensureAuthenticated,
 function(req, res) {
-    return Workspace.findById(req.params.id,
-    function(err, workspace) {
-        return workspace.remove(function(err) {
-            if (!err) {
-                console.log("removed");
-                return res.send('');
-            } else {
-                console.log(err);
-            }
+    var user;
+    User.findById(req.user._id,
+    function(err, user) {
+        var W = user.getModel('Workspaces');
+
+        W.findById(req.params.id, function(err,workspace) {
+           if(!err && workspace)  {
+               workspace.remove(function(err) {
+                  if(!err) {
+                      console.log("Removed!", workspace);
+                      return res.send(workspace);
+                  } else {
+                      console.log("Error:", err);
+                  }
+               });
+           } else {
+               console.log("Error:", err);
+               return res.send(err);
+           }
         });
     });
 });
