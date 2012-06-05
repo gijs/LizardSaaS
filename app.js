@@ -114,12 +114,9 @@ UserSchema.methods.getModel = function(name) {
 }
 
 
-
 // Define User model based on UserSchema
 var User = mongoose.model('User', UserSchema);
 // var Workspace = mongoose.model('Workspace', WorkspaceSchema);
-
-
 
 
 // Generates uniquely prefixed models/collections for a user
@@ -133,7 +130,11 @@ function createTenancy(user, cb) {
 }
 
 
-
+function registerTenant(user) {
+    console.log("Registering user -->", user);
+    mongoose.model(user.prefix + WorkspaceSchemaName, WorkspaceSchema);
+    return true;
+}
 
 
 
@@ -180,6 +181,9 @@ function(token, tokenSecret, profile, done) {
         if (err) console.log('Error: ' + err)
         else console.log(data.display_name + ', ' + data.email)
     });
+
+    // ^^^^^^^ TODO: Token and tokenSecret should be stored in user profile so we can
+    // initialize DropboxClient elsewhere.
 
     process.nextTick(function() {
         console.log("profile._json.email: ", profile._json.email);
@@ -261,8 +265,8 @@ function(req, res, user) {
     var user;
     User.findById(req.user._id,
     function(err, user) {
-    // User.findById(req.params.userid, function(err,user) { // <--- Gets user from req.params
-        console.log("user: ", user);
+
+        registerTenant(user);
         var W = user.getModel('Workspaces');
 
         W.find(function(err, workspaces) {
@@ -280,7 +284,10 @@ function(req, res) {
     var user;
     User.findById(req.user._id,
     function(err, user) {
+
+        registerTenant(user);
         var W = user.getModel('Workspaces');
+        
         var workspace = new W({
             _owner: user,
             title: req.body.title,
@@ -333,6 +340,8 @@ function(req, res) {
     var user;
     User.findById(req.user._id,
     function(err, user) {
+        
+        registerTenant(user);
         var W = user.getModel('Workspaces');
 
         W.findById(req.params.id, function(err,workspace) {
@@ -357,29 +366,40 @@ function(req, res) {
 
 app.get('/api/v1/nl/:userid/dropbox/documents', ensureAuthenticated,
 function(req, res, user) {    
-    dropbox.getMetadata('',
-    function(err, data) {
-        if (err) {
-            console.log(err);
-            return res.send(err);
-        } else {
-            return res.send(data);
-        }
-    });
+    var user;
+    User.findById(req.user._id,
+    function(err, user) {
+       registerTenant(user);
+       
+       // TODO: Dropbox is not known here after a reload, see other TODO
+       dropbox.getMetadata('',
+       function(err, data) {
+           if (err) {
+               console.log(err);
+               return res.send(err);
+           } else {
+               return res.send(data);
+           }
+       });
+    });    
 });
 
 app.post('/api/v1/nl/:userid/dropbox/documents', ensureAuthenticated,
 function(req, res, user) {
-    dropbox.deleteItem(req.body.path, 
-    function(err, data) {
-        if (err) {
-            console.log(err);
-            return res.send(err);
-        }
-        else {
-            return res.send(data);
-        }
-    });    
+    var user;
+    User.findById(req.user._id,
+    function(err,user) {
+        dropbox.deleteItem(req.body.path, 
+        function(err, data) {
+            if (err) {
+                console.log(err);
+                return res.send(err);
+            }
+            else {
+                return res.send(data);
+            }
+        });            
+    });
 });
 
 

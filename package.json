@@ -1,9 +1,21 @@
 {
-    "name": "application-name"
-  , "version": "0.0.1"
+    "name": "LizardSaaS"
+  , "version": "0.0.2"
   , "private": true
   , "dependencies": {
       "express": "2.5.8"
     , "jade": ">= 0.0.1"
+    , "ejs": ""
+    , "passport", ""
+    , "passport-dropbox", ""
+    , "mongodb", ""
+    , "mongoose", ""
+    , "connect", ""
+    , "connect-mongo", ""
+    , "connect-redis", ""
+    , "dropbox", ""
+    , "v8-profiler", ""
+    , "node-inspector", ""
+    , "pg", ""
   }
 }
